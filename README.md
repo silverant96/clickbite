@@ -20,3 +20,8 @@ python main.py --files <файлы.csv> --report <тип_отчета>
 ## Пример
 
 python main.py --files data.csv --report clickbite
+
+
+## Тесты
+
+Модуль для тестов test_report

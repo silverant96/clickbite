@@ -19,7 +19,7 @@ class CSVReportReader:
 
                     if rows:
                         if not self.headers:
-                            self.headers = rows[0]  # заголовки из первого файла
+                            self.headers = rows[0]
                             self.data.extend(rows[1:])
                         else:
                             self.data.extend(rows[1:] if len(rows) > 1 else [])

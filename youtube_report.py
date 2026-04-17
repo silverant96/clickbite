@@ -3,20 +3,21 @@ from tabulate import tabulate
 
 
 class YoutubeReport(CSVReportReader):
-    def print_report(self):
+
+    def get_report(self):
         report_types = {
-            'clickbite': self.print_clickbite_report,
-            'other': self.print_other_report
+            'clickbait': self.get_clickbait_report,
+            'other': self.get_other_report
         }
 
         report_name = self.args.get('report')
 
         if report_name in report_types:
-            report_types[report_name]()
+            return report_types[report_name]()
         else:
             print(f"❌ Неизвестный тип отчета: {report_name}")
 
-    def print_clickbite_report(self):
+    def get_clickbait_report(self):
         filtered_data = []
         headers_indices = {header: idx for idx, header in enumerate(self.headers)}
         header_ctr = headers_indices['ctr']
@@ -36,9 +37,9 @@ class YoutubeReport(CSVReportReader):
             except (ValueError, KeyError):
                 continue
 
-
+        filtered_data.sort(key=lambda x: x[1], reverse=True)
         filtered_headers = ['title', 'ctr', 'retention_rate']
-        print(tabulate(filtered_data, headers=filtered_headers, tablefmt="fancy_grid"))
+        return tabulate(filtered_data, headers=filtered_headers, tablefmt="fancy_grid")
 
-    def print_other_report(self):
-        print(tabulate(self.data, headers=self.headers, tablefmt="grid"))
+    def get_other_report(self):
+        return tabulate(self.data, headers=self.headers, tablefmt="grid")
