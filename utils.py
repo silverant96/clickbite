@@ -7,7 +7,7 @@ def parse_args():
 
     result = {
         'files': [],
-        'report': 'clickbite',
+        'report': 'clickbait',
         'delimiter': ',',  # разделитель по умолчанию
     }
 
